@@ -1,0 +1,101 @@
+# 📝 Todo List Application Guide
+
+## 📘 Problem Statement
+
+Develop a dynamic Todo List application that enables users to manage their tasks efficiently. The application should allow users to:
+
+- Add, edit, delete, and mark tasks as completed
+- Filter tasks based on their status
+- Persist data across sessions using localStorage
+
+## 🎯 Objectives
+
+- Implement core functionalities: add, edit, delete, and complete tasks
+- Enable filtering of tasks: All, Active, Completed
+- Persist tasks using localStorage
+- Ensure input sanitization to prevent XSS attacks
+- Provide a responsive and user-friendly interface
+
+## 🧑‍💻 User Stories
+
+1. **Add Task**: As a user, I want to add new tasks so that I can keep track of what I need to do.
+2. **Edit Task**: As a user, I want to edit existing tasks in case I need to update the task details.
+3. **Delete Task**: As a user, I want to delete tasks that are no longer relevant.
+4. **Complete Task**: As a user, I want to mark tasks as completed to track my progress.
+5. **Filter Tasks**: As a user, I want to filter tasks to view all, active, or completed tasks.
+6. **Persist Tasks**: As a user, I want my tasks to be saved so that they remain after refreshing or reopening the browser.
+7. **Prevent XSS**: As a user, I want the application to be secure and prevent malicious inputs.
+
+## 🛠️ Requirements
+
+### Functional Requirements
+
+- **Add Task**: Users can add a new task by entering text and clicking the "Add" button
+- **Edit Task**: Users can edit an existing task's text
+- **Delete Task**: Users can remove a task from the list
+- **Complete Task**: Users can mark a task as completed, visually indicating its status
+- **Filter Tasks**: Users can filter the task list to show all, active, or completed tasks
+- **Clear Completed**: Users can remove all completed tasks at once
+- **Persist Tasks**: Tasks are saved in localStorage and loaded upon application start
+- **Input Sanitization**: User inputs are sanitized to prevent XSS attacks
+
+### Non-Functional Requirements
+
+- **Responsive Design**: The application should be usable on various devices and screen sizes
+- **Performance**: The application should handle a reasonable number of tasks without performance degradation
+- **Accessibility**: The application should be accessible to users with disabilities
+
+## 🧪 Testing
+
+To ensure the application functions correctly, the following test cases should be implemented using Jest:
+
+1. **Add Task**: Verify that a new task is added to the list
+2. **Edit Task**: Verify that editing a task updates its text
+3. **Delete Task**: Verify that a task is removed from the list
+4. **Complete Task**: Verify that marking a task as completed updates its status
+5. **Filter Tasks**: Verify that filtering displays the correct subset of tasks
+6. **Clear Completed**: Verify that all completed tasks are removed
+7. **Persist Tasks**: Verify that tasks are saved and loaded from localStorage
+8. **Input Sanitization**: Verify that inputs are sanitized to prevent XSS
+
+## 🗂️ File Structure
+
+```
+todo-app/
+├── index.html
+├── style.css
+├── script.js
+└── __tests__/
+    └── script.test.js
+```
+
+## 🚀 Getting Started
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/todo-app.git
+cd todo-app
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run the Application
+
+Open `index.html` in your preferred browser.
+
+### Run Tests
+
+```bash
+npm test
+```
+
+## 📄 Additional Notes
+
+- Ensure that `script.js` contains all the JavaScript logic for the application
+- Use semantic HTML elements to enhance accessibility
+- Comment your code for better readability and maintenance

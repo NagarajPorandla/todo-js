@@ -1,0 +1,158 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background: #f0f2f5;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.input-section {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+#newTodoInput {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+#newTodoInput:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+#addTodoBtn {
+  padding: 12px 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+#addTodoBtn:hover {
+  background: #2980b9;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.controls button {
+  padding: 8px 15px;
+  background: #ecf0f1;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.controls button:hover {
+  background: #bdc3c7;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  transition: all 0.3s;
+}
+
+.todo-item:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.todo-item.completed {
+  background: #ecf9ec;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: #27ae60;
+}
+
+.todo-text {
+  flex-grow: 1;
+  margin: 0 15px;
+  font-size: 17px;
+  word-break: break-word;
+}
+
+.complete-checkbox {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.delete-btn,
+.edit-btn,
+.save-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 18px;
+  color: #7f8c8d;
+  transition: color 0.3s;
+}
+
+.delete-btn:hover {
+  color: #e74c3c;
+}
+
+.edit-btn:hover {
+  color: #3498db;
+}
+
+.save-btn {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.edit-input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 0 10px;
+}
