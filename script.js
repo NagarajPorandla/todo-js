@@ -23,7 +23,13 @@ function renderTodos(filter = "all") {
   } else if (filter === "completed") {
     filterTodos = todos.filter((todo) => todo.completed);
   }
-
+  if (filterTodos.length === 0) {
+    const emptyMsg = document.createElement("li");
+    emptyMsg.textContent = "📭 No todos found!";
+    emptyMsg.className = "empty-state";
+    todoList.appendChild(emptyMsg);
+    return;
+  }
   filterTodos.forEach((todo, index) => {
     const todoItem = document.createElement("li");
     todoItem.className = "todo-item";
