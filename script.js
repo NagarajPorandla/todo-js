@@ -33,6 +33,8 @@ function renderTodos(filter = "all") {
   filterTodos.forEach((todo, index) => {
     const todoItem = document.createElement("li");
     todoItem.className = "todo-item";
+    const checkDiv = document.createElement('div')
+    checkDiv.className = 'right-div'
     if (todo.completed) todoItem.classList.add("completed");
 
     const checkBox = document.createElement("input");
@@ -45,14 +47,20 @@ function renderTodos(filter = "all") {
       renderTodos(filter);
     });
 
-    const textSpan = document.createElement("span");
+    const textWrapper = document.createElement('div')
+    textWrapper.className = 'text-wrapper'
+
+    const textSpan = document.createElement("p");
     textSpan.textContent = todo.text;
     textSpan.className = "todo-text";
 
-    const timeSpan = document.createElement('span')
-    const date = new Date(todo.createdAt) 
-    timeSpan.textContent = date.toLocaleString()
+    const timeSpan = document.createElement("span");
+    const date = new Date(todo.createdAt);
+    timeSpan.textContent = `Created ${date.toLocaleString([],{dateStyle:'short',timeStyle:'short'})}`;
 
+    const toolContainer  =document.createElement('div')
+    toolContainer.className = 'tool-container'
+    
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn";
     editBtn.textContent = "✏️";
@@ -84,11 +92,11 @@ function renderTodos(filter = "all") {
       saveData();
       renderTodos(filter);
     });
-    todoItem.appendChild(checkBox);
-    todoItem.appendChild(textSpan);
-    todoItem.appendChild(timeSpan)
-    todoItem.appendChild(editBtn);
-    todoItem.appendChild(delBtn);
+    checkDiv.append(checkBox,textWrapper);
+    todoItem.appendChild(checkDiv);
+    textWrapper.append(textSpan,timeSpan)
+    toolContainer.append(editBtn,delBtn)
+    todoItem.appendChild(toolContainer);
     todoList.appendChild(todoItem);
   });
 }
@@ -98,15 +106,35 @@ addBtn.addEventListener("click", () => {
     alert("Please enter some thing");
     return;
   }
-  todos.unshift({ text: value, completed: false,createdAt:new Date().toISOString(), });
+  todos.unshift({
+    text: value,
+    completed: false,
+    createdAt: new Date().toISOString(),
+  });
   inputField.value = "";
   saveData();
   renderTodos();
 });
 
-showAllBtn.addEventListener("click", () => renderTodos("all"));
-showActiveBtn.addEventListener("click", () => renderTodos("active"));
-showCompletedBtn.addEventListener("click", () => renderTodos("completed"));
+function setActiveFilterButton(activeBtn) {
+  document
+    .querySelectorAll(".filter-btn")
+    .forEach((btn) => btn.classList.remove("active"));
+  activeBtn.classList.add("active");
+}
+
+showAllBtn.addEventListener("click", () => {
+  renderTodos("all");
+  setActiveFilterButton(showAllBtn);
+});
+showActiveBtn.addEventListener("click", () => {
+  renderTodos("active");
+  setActiveFilterButton(showActiveBtn);
+});
+showCompletedBtn.addEventListener("click", () => {
+  renderTodos("completed");
+  setActiveFilterButton(showCompletedBtn);
+});
 
 clearCompletedBtn.addEventListener("click", () => {
   todos = todos.filter((todo) => !todo.completed);

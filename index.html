@@ -13,14 +13,20 @@
       <form class="input-section" onsubmit="event.preventDefault()">
         <input type="text" id="newTodoInput" placeholder="Add a new task..." />
 
-        <button id="addTodoBtn" type="submit">Add</button>
+        <button id="addTodoBtn" type="submit">Add Task</button>
       </form>
 
       <div class="controls">
-        <button id="showAllBtn">All</button>
-        <button id="showActiveBtn">Active</button>
-        <button id="showCompletedBtn">Completed</button>
-        <button id="clearCompletedBtn">Clear Completed</button>
+        <div>
+          <button id="showAllBtn" class="filter-btn">All</button>
+          <button id="showActiveBtn" class="filter-btn">Active</button>
+          <button id="showCompletedBtn" class="filter-btn">Completed</button>
+        </div>
+        <div>
+          <button id="clearCompletedBtn" class="filter-btn">
+            Clear Completed
+          </button>
+        </div>
       </div>
 
       <ul id="todoList"></ul>
