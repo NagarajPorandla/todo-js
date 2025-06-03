@@ -1,0 +1,110 @@
+const container = document.querySelector(".container");
+const inputField = document.querySelector("#newTodoInput");
+const addBtn = document.querySelector("#addTodoBtn");
+const todoList = document.querySelector("#todoList");
+
+const showAllBtn = document.getElementById("showAllBtn");
+const showActiveBtn = document.getElementById("showActiveBtn");
+const showCompletedBtn = document.getElementById("showCompletedBtn");
+const clearCompletedBtn = document.getElementById("clearCompletedBtn");
+
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+function saveData() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function renderTodos(filter = "all") {
+  todoList.innerHTML = "";
+  let filterTodos = todos;
+
+  if (filter === "active") {
+    filterTodos = todos.filter((todo) => !todo.completed);
+  } else if (filter === "completed") {
+    filterTodos = todos.filter((todo) => todo.completed);
+  }
+
+  filterTodos.forEach((todo, index) => {
+    const todoItem = document.createElement("li");
+    todoItem.className = "todo-item";
+    if (todo.completed) todoItem.classList.add("completed");
+
+    const checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    checkBox.className = "complete-checkbox";
+    checkBox.checked = todo.completed;
+    checkBox.addEventListener("change", () => {
+      todo.completed = checkBox.checked;
+      saveData();
+      renderTodos(filter);
+    });
+
+    const textSpan = document.createElement("span");
+    textSpan.textContent = todo.text;
+    textSpan.className = "todo-text";
+
+    const timeSpan = document.createElement('span')
+    const date = new Date(todo.createdAt) 
+    timeSpan.textContent = date.toLocaleString()
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "edit-btn";
+    editBtn.textContent = "✏️";
+    editBtn.addEventListener("click", () => {
+      if (editBtn.textContent === "✏️") {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = textSpan.textContent;
+        input.className = "edit-input";
+        textSpan.textContent = "";
+        textSpan.appendChild(input);
+        input.focus();
+        editBtn.textContent = "🗃️";
+      } else {
+        const input = textSpan.querySelector("input");
+        if (input.value.trim() !== "") {
+          todo.text = input.value;
+          saveData();
+          renderTodos(filter);
+        }
+      }
+    });
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "❌";
+    delBtn.className = "delete-btn";
+    delBtn.addEventListener("click", () => {
+      todos.splice(index, 1);
+      saveData();
+      renderTodos(filter);
+    });
+    todoItem.appendChild(checkBox);
+    todoItem.appendChild(textSpan);
+    todoItem.appendChild(timeSpan)
+    todoItem.appendChild(editBtn);
+    todoItem.appendChild(delBtn);
+    todoList.appendChild(todoItem);
+  });
+}
+addBtn.addEventListener("click", () => {
+  const value = inputField.value.trim();
+  if (value === "") {
+    alert("Please enter some thing");
+    return;
+  }
+  todos.unshift({ text: value, completed: false,createdAt:new Date().toISOString(), });
+  inputField.value = "";
+  saveData();
+  renderTodos();
+});
+
+showAllBtn.addEventListener("click", () => renderTodos("all"));
+showActiveBtn.addEventListener("click", () => renderTodos("active"));
+showCompletedBtn.addEventListener("click", () => renderTodos("completed"));
+
+clearCompletedBtn.addEventListener("click", () => {
+  todos = todos.filter((todo) => !todo.completed);
+  saveData();
+  renderTodos();
+});
+renderTodos();

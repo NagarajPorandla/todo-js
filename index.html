@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,10 +10,11 @@
     <div class="container">
       <h1>My Todo List</h1>
 
-      <div class="input-section">
+      <form class="input-section" onsubmit="event.preventDefault()">
         <input type="text" id="newTodoInput" placeholder="Add a new task..." />
-        <button id="addTodoBtn">Add</button>
-      </div>
+
+        <button id="addTodoBtn" type="submit">Add</button>
+      </form>
 
       <div class="controls">
         <button id="showAllBtn">All</button>

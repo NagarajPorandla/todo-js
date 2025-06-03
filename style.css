@@ -359,6 +359,10 @@ ul::-webkit-scrollbar-thumb:hover {
   color: #a0aec0;
   font-style: italic;
 }
+#clearCompletedBtn{
+  background-color: orangered;
+  color: #fff;
+}
 
 /* Responsive design */
 @media (max-width: 480px) {
